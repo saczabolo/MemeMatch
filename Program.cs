@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MemeMatch.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
