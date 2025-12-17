@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MemeMatch")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4938afacd48b12af6dc84ad98f21f97cfa7d46ab")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5898b78919512a812e29e575c5412b1c1a513f25")]
 [assembly: System.Reflection.AssemblyProductAttribute("MemeMatch")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MemeMatch")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
