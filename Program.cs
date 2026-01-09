@@ -48,24 +48,39 @@ using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-    if (!context.Prompts.Any())
-    {
-        context.Prompts.AddRange(
-            new Prompt { Text = "Kiedy budzik dzwoni w poniedzia³ek rano" },
-            new Prompt { Text = "Gdy kod dzia³a, ale nie wiesz dlaczego" },
-            new Prompt { Text = "Kiedy projekt oddajesz 5 minut przed deadlinem" }
-        );
-    }
-
     if (!context.Memes.Any())
     {
-        context.Memes.AddRange(
-            new Meme { ImageUrl = "https://example.com/meme1.jpg", IsActive = true },
-            new Meme { ImageUrl = "https://example.com/meme2.jpg", IsActive = true },
-            new Meme { ImageUrl = "https://example.com/meme3.jpg", IsActive = true },
-            new Meme { ImageUrl = "https://example.com/meme4.jpg", IsActive = true },
-            new Meme { ImageUrl = "https://example.com/meme5.jpg", IsActive = true }
-        );
+        var memes = new List<Meme>
+{
+            new Meme { ImageUrl = "meme1.jpg", IsActive = true },
+            new Meme { ImageUrl = "meme2.jpg", IsActive = true },
+            new Meme { ImageUrl = "meme3.jpg", IsActive = true },
+            new Meme { ImageUrl = "meme4.jpg", IsActive = true },
+};
+
+        context.Memes.AddRange(memes);
+        context.SaveChanges();
+
+        var prompts = new List<Prompt>
+{
+            new Prompt { Text = "Kiedy kod dzia³a, ale nie wiesz dlaczego", CorrectMemeId = memes[0].Id },
+            new Prompt { Text = "Gdy projekt oddajesz o 23:59", CorrectMemeId = memes[1].Id }
+        };
+
+        context.Prompts.AddRange(prompts);
+        context.SaveChanges();
+    }
+
+    if (!context.Users.Any())
+    {
+        context.Users.Add(new User
+        {
+            Username = "testuser",
+            Email = "test@test.pl",
+            Password = BCrypt.Net.BCrypt.HashPassword("Haslo123!"),
+            Role = "User"
+        });
+        context.SaveChanges();
     }
 
     context.SaveChanges();
