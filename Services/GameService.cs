@@ -17,6 +17,7 @@ namespace MemeMatch.Services
         {
             return _context.Memes
             .Where(m =>m.IsActive)
+            .AsEnumerable()
             .OrderBy(x => Guid.NewGuid())
             .Take(5)
             .ToList();
@@ -25,6 +26,7 @@ namespace MemeMatch.Services
         public Prompt GetRandomPrompt()
         {
             return _context.Prompts
+                .AsEnumerable()
                 .OrderBy(x => Guid.NewGuid())
                 .First();
         }
