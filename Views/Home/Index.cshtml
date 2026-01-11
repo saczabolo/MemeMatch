@@ -1,8 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Welcome to MemeMatch</h1>
+
+<p>
+    Match, rate and enjoy the best memes on the internet 😄
+</p>
+
+<br />
+
+<a class="btn" asp-controller="Memes" asp-action="Index">
+    Browse memes
+</a>
