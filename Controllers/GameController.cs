@@ -21,10 +21,15 @@ namespace MemeMatch.Controllers
         [HttpGet("start")]
         public IActionResult StartGame()
         {
-            var memes = _gameService.GetRandomMemes();
-            var prompt = _gameService.GetRandomPrompt();
-
-            return Ok(new {prompt, memes});
+            try
+            {
+                var (prompt, memes) = _gameService.StartGame();
+                return Ok(new { prompt, memes });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("answer")]
