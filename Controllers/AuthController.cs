@@ -9,23 +9,34 @@ using System.Text;
 
 namespace MemeMatch.Controllers
 {
-    [ApiController]
-    [Route("api/auth")]
-    public class AuthController : ControllerBase
+    public class AuthController : Controller
     {
         private readonly AppDbContext _context;
-        private const string JwtKey = "SUPER_SECRET_KEY_12345_SUPER_SECRET_KEY";
 
         public AuthController(AppDbContext context)
         {
             _context = context;
         }
 
-        [HttpPost("register")]
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public IActionResult Register(RegisterDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(dto);
+            }
+
             if (_context.Users.Any(u => u.Email == dto.Email))
-                return BadRequest("Użytkownik z tym emailem już istnieje");
+            {
+                ModelState.AddModelError("", "Użytkownik z tym emailem już istnieje");
+                return View(dto);
+            }
 
             var user = new User
             {
@@ -38,41 +49,43 @@ namespace MemeMatch.Controllers
             _context.Users.Add(user);
             _context.SaveChanges();
 
-            return Ok("Rejestracja zakończona sukcesem");
+            TempData["Success"] = "Rejestracja zakończona sukcesem";
+            return RedirectToAction(nameof(Login));
         }
 
-        [HttpPost("login")]
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public IActionResult Login(LoginDto dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(dto);
+            }
+
             var user = _context.Users.FirstOrDefault(u => u.Email == dto.Email);
-            if (user == null)
-                return Unauthorized("Nieprawidłowe dane logowania");
 
-            if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
-                return Unauthorized("Nieprawidłowe dane logowania");
+            if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
+            {
+                ModelState.AddModelError("", "Nieprawidłowe dane logowania");
+                return View(dto);
+            }
 
-            var token = GenerateJwtToken(user);
-            return Ok(new {token});
+            HttpContext.Session.SetInt32("UserId", user.Id);
+            HttpContext.Session.SetString("Username", user.Username);
+            HttpContext.Session.SetString("Role", user.Role);
+
+            return RedirectToAction("StartGame", "Game");
         }
 
-        private string GenerateJwtToken(User user)
+        public IActionResult Logout()
         {
-            var claims = new[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Role)
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtKey));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.Now.AddHours(2),
-                signingCredentials: creds);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            HttpContext.Session.Clear();
+            return RedirectToAction(nameof(Login));
         }
     }
 }

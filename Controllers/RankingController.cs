@@ -1,12 +1,11 @@
 ﻿using MemeMatch.Data;
+using MemeMatch.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
 
 namespace MemeMatch.Controllers
 {
-    [ApiController]
-    [Route("api/ranking")]
-    public class RankingController : ControllerBase
+    public class RankingController : Controller
     {
         private readonly AppDbContext _context;
 
@@ -19,15 +18,15 @@ namespace MemeMatch.Controllers
         public IActionResult GetRanking()
         {
             var ranking = _context.Users
-                .Select(u => new
+                .Select(u => new RankingView
                 {
-                    u.Username,
+                    Username = u.Username,
                     Points = u.GameRounds.Sum(g => g.Score)
                 })
                 .OrderByDescending(x => x.Points)
                 .ToList();
 
-            return Ok(ranking);
+            return View(ranking);
         }
     }
 }
