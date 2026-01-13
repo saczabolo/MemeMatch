@@ -2,18 +2,21 @@ using MemeMatch.Data;
 using MemeMatch.Services;
 using Microsoft.EntityFrameworkCore;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(option =>
 option.UseSqlite("Data Source=memematch.db"));
 
-builder.Services.AddScoped<GameService>();
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-app.UseAuthentication();
+
 app.UseAuthorization();
-app.MapControllers();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 app.Run();
