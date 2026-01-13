@@ -2,10 +2,6 @@
 using MemeMatch.DTO;
 using MemeMatch.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace MemeMatch.Controllers
 {
@@ -40,7 +36,7 @@ namespace MemeMatch.Controllers
 
             var user = new User
             {
-                Username = dto.UserName,
+                Username = dto.Username,
                 Email = dto.Email,
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
                 Role = "User"
