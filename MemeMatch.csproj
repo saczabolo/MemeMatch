@@ -17,4 +17,8 @@
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\memes\" />
+  </ItemGroup>
+
 </Project>

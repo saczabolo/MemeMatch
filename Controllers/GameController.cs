@@ -24,13 +24,10 @@ namespace MemeMatch.Controllers
             {
                 var (prompt, memes) = _gameService.StartGame();
 
-                var viewModel = new GameStartView
-                {
-                    Prompt = prompt,
-                    Memes = memes
-                };
+                ViewBag.Prompt = prompt;
+                ViewBag.Memes = memes;
 
-                return View(viewModel);
+                return View();
             }
             catch (Exception ex)
             {

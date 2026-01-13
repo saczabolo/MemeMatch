@@ -18,9 +18,9 @@ namespace MemeMatch.Controllers
         public IActionResult GetRanking()
         {
             var ranking = _context.Users
-                .Select(u => new RankingView
+                .Select(u => new 
                 {
-                    Username = u.Username,
+                    u.Username,
                     Points = u.GameRounds.Sum(g => g.Score)
                 })
                 .OrderByDescending(x => x.Points)

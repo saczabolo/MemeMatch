@@ -2,7 +2,6 @@ using MemeMatch.Data;
 using MemeMatch.Services;
 using Microsoft.EntityFrameworkCore;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(option =>
@@ -12,11 +11,9 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-
 app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
 
 app.Run();
