@@ -5,9 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MemeMatch.Controllers
 {
-    [ApiController]
-    [Route("api/game")]
-    public class GameController : ControllerBase
+    public class GameController : Controller
     {
         private readonly AppDbContext _context;
         private readonly GameService _gameService;
@@ -18,24 +16,40 @@ namespace MemeMatch.Controllers
             _gameService = gameService;
         }
 
-        [HttpGet("start")]
+
+        [HttpGet]
         public IActionResult StartGame()
         {
             try
             {
                 var (prompt, memes) = _gameService.StartGame();
-                return Ok(new { prompt, memes });
+
+                var viewModel = new GameStartView
+                {
+                    Prompt = prompt,
+                    Memes = memes
+                };
+
+                return View(viewModel);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                ViewBag.Error = ex.Message;
+                return View("Error");
             }
         }
 
-        [HttpPost("answer")]
+        [HttpPost]
         public IActionResult Answer(int userId, int memeId, int promptId)
         {
-            bool isCorrect = memeId % 2 == 0;
+            var prompt = _context.Prompts.Find(promptId);
+
+            if (prompt == null)
+            {
+                return RedirectToAction(nameof(StartGame));
+            }
+            
+            bool isCorrect = memeId == prompt.CorrectMemeId;
             int score = isCorrect ? 10 : 0;
 
             var round = new GameRound
@@ -50,7 +64,23 @@ namespace MemeMatch.Controllers
             _context.GameRounds.Add(round);
             _context.SaveChanges();
 
-            return Ok(new {isCorrect, score});
+            TempData["IsCorrect"] = isCorrect;
+            TempData["Score"] = score;
+
+            return RedirectToAction(nameof(Result));
+        }
+
+        public IActionResult Result()
+        {
+            if (TempData["IsCorrect"] == null)
+            {
+                return RedirectToAction(nameof(StartGame));
+            }
+
+            ViewBag.IsCorrect = (bool)TempData["IsCorrect"];
+            ViewBag.Score = (int)TempData["Score"];
+
+            return View();
         }
     }
 }
