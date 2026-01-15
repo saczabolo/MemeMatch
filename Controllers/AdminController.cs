@@ -1,11 +1,12 @@
 ﻿using MemeMatch.Data;
 using MemeMatch.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace MemeMatch.Controllers
 {
-    
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly AppDbContext _context;

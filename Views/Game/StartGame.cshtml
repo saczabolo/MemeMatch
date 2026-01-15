@@ -1,0 +1,16 @@
+﻿<h2>@ViewBag.Prompt.Text</h2>
+
+<div style="display:flex; gap:20px;">
+    @foreach (var meme in ViewBag.Memes)
+    {
+        <form asp-action="Answer" method="post">
+          
+            <input type="hidden" name="promptId" value="@ViewBag.Prompt.Id" />
+            <input type="hidden" name="memeId" value="@meme.Id" />
+
+            <button type="submit" style="border:none; background:none;">
+                <img src="@meme.ImagePath" width="200" />
+            </button>
+        </form>
+    }
+</div>

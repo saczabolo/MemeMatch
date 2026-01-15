@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Prompt>
+
+<h2>Memes + Prompty</h2>
+
+<a asp-action="AddMeme"
+   class="btn btn-success mb-3">➕ Dodaj meme + prompt</a>
+
+<table class="table table-bordered align-middle">
+    <thead>
+        <tr>
+            <th>Obraz</th>
+            <th>Tekst</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@item.CorrectMeme.ImagePath"
+                         style="max-height:120px; border-radius:8px;" />
+                </td>
+                <td>@item.Text</td>
+                <td>
+                    <a asp-action="EditMeme"
+                       asp-route-id="@item.Id"
+                       class="btn btn-primary btn-sm">Edytuj</a>
+
+                    <a asp-action="DeleteMeme"
+                       asp-route-id="@item.Id"
+                       class="btn btn-danger btn-sm">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

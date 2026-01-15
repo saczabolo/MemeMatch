@@ -1,0 +1,48 @@
+﻿@model Prompt
+
+@{
+    ViewData["Title"] = "Usuń meme";
+}
+
+<h2 class="text-danger">Usuń meme</h2>
+
+<p class="fw-bold text-danger">
+    Czy na pewno chcesz usunąć TEN MEME?
+</p>
+
+<p>
+    Ta operacja usunie:
+</p>
+
+<ul class="text-danger">
+    <li>obraz mema</li>
+    <li>prompt</li>
+    <li>plik z serwera</li>
+</ul>
+
+<hr />
+
+<div class="mb-3">
+    <label class="form-label fw-bold">Podgląd mema</label><br />
+    <img src="@Model.CorrectMeme.ImagePath"
+         style="max-height:220px; border-radius:10px;" />
+</div>
+
+<div class="mb-4">
+    <label class="form-label fw-bold">Tekst promptu</label>
+    <div class="border p-3 rounded bg-light">
+        @Model.Text
+    </div>
+</div>
+
+<form asp-action="DeleteMeme2" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    <button type="submit" class="btn btn-danger">
+        🗑️ Usuń bezpowrotnie
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary ms-2">
+        Anuluj
+    </a>
+</form>

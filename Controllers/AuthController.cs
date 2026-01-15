@@ -1,86 +1,97 @@
 ﻿using MemeMatch.Data;
 using MemeMatch.DTO;
 using MemeMatch.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace MemeMatch.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AuthController(AppDbContext context)
+        public AuthController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
-            _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterDto dto)
+        [AllowAnonymous]
+        public async Task<IActionResult> Register(RegisterDto dto)
         {
             if (!ModelState.IsValid)
             {
                 return View(dto);
             }
 
-            if (_context.Users.Any(u => u.Email == dto.Email))
+            var user = new User
             {
-                ModelState.AddModelError("", "Użytkownik z tym emailem już istnieje");
+                UserName = dto.Username,
+                Email = dto.Email,
+            };
+
+            var result = await _userManager.CreateAsync(user, dto.Password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                    ModelState.AddModelError("", error.Description);
+
                 return View(dto);
             }
 
-            var user = new User
-            {
-                Username = dto.Username,
-                Email = dto.Email,
-                Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
-                Role = "User"
-            };
-
-            _context.Users.Add(user);
-            _context.SaveChanges();
+            await _userManager.AddToRoleAsync(user, "User");
 
             TempData["Success"] = "Rejestracja zakończona sukcesem";
             return RedirectToAction(nameof(Login));
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Login(LoginDto dto)
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginDto dto)
         {
             if (!ModelState.IsValid)
             {
                 return View(dto);
             }
 
-            var user = _context.Users.FirstOrDefault(u => u.Email == dto.Email);
+            var result = await _signInManager.PasswordSignInAsync(
+                dto.Username,
+                dto.Password,
+                isPersistent: false,
+                lockoutOnFailure: false
+                );
 
-            if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))
+            if (!result.Succeeded)
             {
                 ModelState.AddModelError("", "Nieprawidłowe dane logowania");
                 return View(dto);
             }
 
-            HttpContext.Session.SetInt32("UserId", user.Id);
-            HttpContext.Session.SetString("Username", user.Username);
-            HttpContext.Session.SetString("Role", user.Role);
-
             return RedirectToAction("StartGame", "Game");
         }
 
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            HttpContext.Session.Clear();
+            await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(Login));
         }
     }

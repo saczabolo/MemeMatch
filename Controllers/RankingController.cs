@@ -2,7 +2,6 @@
 using MemeMatch.Models;
 using Microsoft.AspNetCore.Mvc;
 
-
 namespace MemeMatch.Controllers
 {
     public class RankingController : Controller
@@ -20,7 +19,7 @@ namespace MemeMatch.Controllers
             var ranking = _context.Users
                 .Select(u => new 
                 {
-                    u.Username,
+                    Username = u.UserName,
                     Points = u.GameRounds.Sum(g => g.Score)
                 })
                 .OrderByDescending(x => x.Points)

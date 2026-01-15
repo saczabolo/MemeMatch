@@ -1,19 +1,23 @@
 ﻿using MemeMatch.Data;
 using MemeMatch.Models;
 using MemeMatch.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MemeMatch.Controllers
 {
+    
     public class GameController : Controller
     {
         private readonly AppDbContext _context;
         private readonly GameService _gameService;
+        private readonly UserManager<User> _userManager;
 
-        public GameController(AppDbContext context, GameService gameService)
+        public GameController(AppDbContext context, GameService gameService, UserManager<User> userManager)
         {
             _context = context;
             _gameService = gameService;
+            _userManager = userManager;
         }
 
 
@@ -37,8 +41,11 @@ namespace MemeMatch.Controllers
         }
 
         [HttpPost]
-        public IActionResult Answer(int userId, int memeId, int promptId)
+        public async Task<IActionResult> Answer(int memeId, int promptId)
         {
+            var user = await _userManager.GetUserAsync(User);
+            
+
             var prompt = _context.Prompts.Find(promptId);
 
             if (prompt == null)
@@ -51,7 +58,7 @@ namespace MemeMatch.Controllers
 
             var round = new GameRound
             {
-                UserId = userId,
+                UserId = user.Id,
                 SelectedMemeId = memeId,
                 PromptId = promptId,
                 IsCorrect = isCorrect,
