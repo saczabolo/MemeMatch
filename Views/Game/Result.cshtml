@@ -1,0 +1,14 @@
+﻿<h2>Wynik</h2>
+
+@if (ViewBag.IsCorrect)
+{
+    <p>✅ Dobrze!</p>
+}
+else
+{
+    <p>❌ Źle!</p>
+}
+
+<p>Punkty: @ViewBag.Score</p>
+
+<a asp-action="StartGame">Zagraj ponownie</a>

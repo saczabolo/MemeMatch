@@ -1,0 +1,10 @@
+﻿<form asp-action="EditMeme" method="post">
+    <input type="hidden" name="promptId" value="@Model.Id" />
+
+    <div class="mb-3">
+        <label>Tekst promptu</label>
+        <textarea name="promptText" class="form-control">@Model.Text</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Zapisz</button>
+</form>
