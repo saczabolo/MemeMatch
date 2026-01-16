@@ -181,8 +181,7 @@ namespace MemeMatch.Migrations
                     PromptId = table.Column<int>(type: "INTEGER", nullable: false),
                     SelectedMemeId = table.Column<int>(type: "INTEGER", nullable: false),
                     IsCorrect = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Score = table.Column<int>(type: "INTEGER", nullable: false),
-                    PlayedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    Score = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -201,7 +200,7 @@ namespace MemeMatch.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Text = table.Column<string>(type: "TEXT", nullable: false),
+                    Text = table.Column<string>(type: "TEXT", maxLength: 200, nullable: false),
                     CorrectMemeId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -227,7 +226,7 @@ namespace MemeMatch.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "ADMIN_ID", 0, "e6e04f48-9e73-486a-9a50-6dfa98dc90e5", "admin@wp.pl", true, false, null, "ADMIN@WP.PL", "ADMIN", "AQAAAAIAAYagAAAAEKBQP0BqFZZy/5qbyqrS/3fre6/IF0QtHDodAWiAej3jBXtv38LE/Hu19kO+XPWuIQ==", null, false, "d505724f-f36c-4f1b-9a17-e2ec5b63908a", false, "admin" });
+                values: new object[] { "ADMIN_ID", 0, "85aed813-b1d1-489b-b7fa-e3c64cb370a6", "admin@wp.pl", true, false, null, "ADMIN@WP.PL", "ADMIN", "AQAAAAIAAYagAAAAEGRq2HTBURB0ptixnqoBK+LwI2CgU91eXQ6LyxSVt2FvREuqynbCmXfbU9QyMyAU3Q==", null, false, "6c3361cf-31d2-4a2c-84bd-95ae5bd0ceb5", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

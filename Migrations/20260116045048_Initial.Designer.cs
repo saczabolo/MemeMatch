@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MemeMatch.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260115160444_Initial")]
+    [Migration("20260116045048_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -28,9 +28,6 @@ namespace MemeMatch.Migrations
 
                     b.Property<bool>("IsCorrect")
                         .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("PlayedAt")
-                        .HasColumnType("TEXT");
 
                     b.Property<int>("PromptId")
                         .HasColumnType("INTEGER");
@@ -78,6 +75,7 @@ namespace MemeMatch.Migrations
 
                     b.Property<string>("Text")
                         .IsRequired()
+                        .HasMaxLength(200)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -155,15 +153,15 @@ namespace MemeMatch.Migrations
                         {
                             Id = "ADMIN_ID",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e6e04f48-9e73-486a-9a50-6dfa98dc90e5",
+                            ConcurrencyStamp = "85aed813-b1d1-489b-b7fa-e3c64cb370a6",
                             Email = "admin@wp.pl",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@WP.PL",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKBQP0BqFZZy/5qbyqrS/3fre6/IF0QtHDodAWiAej3jBXtv38LE/Hu19kO+XPWuIQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGRq2HTBURB0ptixnqoBK+LwI2CgU91eXQ6LyxSVt2FvREuqynbCmXfbU9QyMyAU3Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d505724f-f36c-4f1b-9a17-e2ec5b63908a",
+                            SecurityStamp = "6c3361cf-31d2-4a2c-84bd-95ae5bd0ceb5",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
