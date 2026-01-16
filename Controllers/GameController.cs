@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MemeMatch.Controllers
 {
-    
     public class GameController : Controller
     {
         private readonly AppDbContext _context;
@@ -44,8 +43,15 @@ namespace MemeMatch.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult StartNewGame()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [ActionName("StartNewGame")]
+        public IActionResult StartNewGame2()
         {
             HttpContext.Session.SetInt32("Round", 1);
             HttpContext.Session.SetInt32("TotalScore", 0);

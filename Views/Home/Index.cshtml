@@ -16,4 +16,19 @@
         🎮 Rozpocznij nową grę
     </button>
 </form>
+<form asp-controller="Auth" asp-action="Login" method="post">
+    <button type="submit" class="btn btn-primary btn-lg">
+        🎮 zaloguj się
+    </button>
+</form>
+<form asp-controller="Auth" asp-action="Register" method="post">
+    <button type="submit" class="btn btn-primary btn-lg">
+        🎮 wyloguj się
+    </button>
+</form>
+<form asp-controller="Ranking" asp-action="GetRanking" method="get">
+    <button type="submit" class="btn btn-primary btn-lg">
+        🎮 zobacz ranking
+    </button>
+</form>
 
