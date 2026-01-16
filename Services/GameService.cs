@@ -17,7 +17,11 @@ namespace MemeMatch.Services
         {
             var prompt = _context.Prompts
                 .OrderBy(x => EF.Functions.Random())
-                .First();
+                .FirstOrDefault();
+
+            if (prompt == null)
+                throw new Exception("Brak promptów w bazie");
+
             var correctMemeId = prompt.CorrectMemeId;
 
             var memes = _context.Memes
@@ -25,9 +29,6 @@ namespace MemeMatch.Services
                 .Take(5)
                 .ToList();
              
-            if (prompt == null)
-                throw new Exception("Brak promptów w bazie");
-
             if (memes == null)
                 throw new Exception("Brak memów w bazie");
 

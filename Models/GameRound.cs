@@ -16,8 +16,6 @@ namespace MemeMatch.Models
 
         public int Score { get; set; }
 
-        public DateTime PlayedAt { get; set; } = DateTime.Now;
-
         public User User { get; set; } = null!;
     }
 }
