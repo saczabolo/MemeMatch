@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Błąd gry";
+}
+
+<h2 style="color:red; margin-bottom:20px;">Wystąpił błąd!</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div style="padding:15px; border:1px solid red; background-color:#ffe6e6; border-radius:5px; margin-bottom:20px;">
+        <strong>Komunikat błędu:</strong>
+        <p>@ViewBag.Error</p>
+    </div>
+}
+else
+{
+    <p>Wystąpił nieoczekiwany błąd. Spróbuj ponownie później.</p>
+}
+
+<a asp-action="StartGame" class="btn btn-primary" style="padding:10px 20px; text-decoration:none; background-color:#007bff; color:white; border-radius:5px;">Powrót do gry</a>

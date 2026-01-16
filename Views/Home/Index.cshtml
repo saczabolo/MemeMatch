@@ -10,8 +10,10 @@
 
 <br />
 
-<a class="btn" asp-controller="Memes" asp-action="Index">
-    Browse memes
-</a>@{
-ViewData["Title"] = "Home";
-}
+
+<form asp-controller="Game" asp-action="StartNewGame" method="post">
+    <button type="submit" class="btn btn-primary btn-lg">
+        🎮 Rozpocznij nową grę
+    </button>
+</form>
+

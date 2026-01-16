@@ -1,0 +1,10 @@
+﻿<h1>🏆 WYGRAŁEŚ!</h1>
+
+<p>Ukończone rundy: @ViewBag.RoundsPlayed</p>
+<p>Łączny wynik: <strong>@ViewBag.TotalScore</strong> pkt</p>
+
+<form asp-action="StartNewGame" method="post">
+    <button type="submit" class="btn btn-primary">
+        Rozpocznij nową grę
+    </button>
+</form>
