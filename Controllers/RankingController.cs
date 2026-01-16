@@ -1,5 +1,6 @@
 ﻿using MemeMatch.Data;
 using MemeMatch.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MemeMatch.Controllers
@@ -14,6 +15,7 @@ namespace MemeMatch.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult GetRanking()
         {
             var ranking = _context.Users

@@ -54,7 +54,7 @@ namespace MemeMatch.Controllers
             await _userManager.AddToRoleAsync(user, "User");
 
             TempData["Success"] = "Rejestracja zakończona sukcesem";
-            return RedirectToAction(nameof(Login));
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -86,7 +86,7 @@ namespace MemeMatch.Controllers
                 return View(dto);
             }
 
-            return RedirectToAction("StartGame", "Game");
+            return RedirectToAction("StartNewGame", "Game");
         }
 
         public async Task<IActionResult> Logout()
