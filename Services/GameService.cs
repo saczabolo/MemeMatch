@@ -1,6 +1,6 @@
 ﻿using MemeMatch.Data;
 using MemeMatch.Models;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace MemeMatch.Services
 {
@@ -16,15 +16,15 @@ namespace MemeMatch.Services
         public (Prompt prompt, List<Meme> memes) StartGame()
         {
             var prompt = _context.Prompts
-                .OrderBy(x => Guid.NewGuid())
+                .OrderBy(x => EF.Functions.Random())
                 .First();
             var correctMemeId = prompt.CorrectMemeId;
 
             var memes = _context.Memes
-                .OrderBy(x => Guid.NewGuid())
-                .Take(4)
+                .OrderBy(x => EF.Functions.Random())
+                .Take(5)
                 .ToList();
-
+             
             if (prompt == null)
                 throw new Exception("Brak promptów w bazie");
 
