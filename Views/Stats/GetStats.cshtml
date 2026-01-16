@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Twoje statystyki";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="card mt-3" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">Statystyki gracza</h5>
+        <p class="card-text">Liczba rozegranych rund: <strong>@ViewBag.TotalRounds</strong></p>
+        <p class="card-text">Łączna liczba punktów: <strong>@ViewBag.TotalPoints</strong></p>
+        <p class="card-text">Średnia punktów na rundę: <strong>@String.Format("{0:0.00}", ViewBag.AveragePoints)</strong></p>
+    </div>
+</div>
