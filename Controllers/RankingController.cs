@@ -20,7 +20,7 @@ namespace MemeMatch.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult GetRanking()
+        public IActionResult GetRanking(string sortOrder = "desc")
         {
             var users = _context.Users
                 .Include(u => u.GameRounds)
@@ -29,15 +29,18 @@ namespace MemeMatch.Controllers
 
             var ranking = users
                 .Where(u => !_userManager.IsInRoleAsync(u, "Admin").Result)
-                .Select(u => new 
+                .Select(u => new
                 {
                     Username = u.UserName,
                     Points = u.GameRounds.Sum(g => g.Score)
-                })
-                .OrderByDescending(x => x.Points)
-                .ToList();
+                });
 
-            return View(ranking);
+            ranking = sortOrder.ToLower() == "asc"
+                ? ranking.OrderBy(x => x.Points)
+                : ranking.OrderByDescending(x => x.Points);
+                
+
+            return View(ranking.ToList());
         }
     }
 }

@@ -1,5 +1,12 @@
 ﻿@model IEnumerable<dynamic>
 
+<h2>Ranking graczy</h2>
+
+<div class="mb-3">
+    <a asp-action="GetRanking" asp-route-sortOrder="desc" class="btn btn-primary">Sortuj malejąco</a>
+    <a asp-action="GetRanking" asp-route-sortOrder="asc" class="btn btn-secondary">Sortuj rosnąco</a>
+</div>
+
 <table class="table table-striped">
     <thead>
         <tr>
