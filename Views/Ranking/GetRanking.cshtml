@@ -1,0 +1,21 @@
+﻿@model IEnumerable<dynamic>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Gracz</th>
+            <th>Punkty</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                <td>@Model.ElementAt(i).Username</td>
+                <td>@Model.ElementAt(i).Points</td>
+            </tr>
+        }
+    </tbody>
+</table>
