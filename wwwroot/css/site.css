@@ -66,10 +66,12 @@ h1, h2, h3 {
 button,
 .btn {
     background: linear-gradient(90deg, #22c55e, #16a34a);
+    align-content: center;
     color: white !important;
     border: none;
+    border-radius: 15px;
     padding: 12px 24px;
-    border-radius: 12px;
+    border-radius: 13px;
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;

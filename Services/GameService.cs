@@ -26,7 +26,7 @@ namespace MemeMatch.Services
 
             var memes = _context.Memes
                 .OrderBy(x => EF.Functions.Random())
-                .Take(5)
+                .Take(3)
                 .ToList();
              
             if (memes == null)
