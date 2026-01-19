@@ -22,6 +22,7 @@ builder.Services.AddScoped<GameService>();
 var app = builder.Build();
 
 app.UseAuthentication();
+app.UseStaticFiles();
 app.UseAuthorization();
 
 app.UseSession();

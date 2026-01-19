@@ -1,12 +1,11 @@
-/* RESET */
-{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
-/* BODY */
+
 body {
     background: linear-gradient(135deg, #667eea, #764ba2);
     min-height: 100vh;
@@ -14,7 +13,7 @@ body {
     flex-direction: column;
 }
 
-/* NAVBAR */
+
 .mm-navbar {
     width: 100%;
     background: linear-gradient(90deg, #2563eb, #7c3aed);
@@ -44,7 +43,7 @@ body {
         transform: scale(1.05);
     }
 
-/* CONTAINER */
+
 .mm-container {
     max-width: 900px;
     width: 100%;
@@ -56,7 +55,6 @@ body {
     text-align: center;
 }
 
-/*HEADINGS */
 h1, h2, h3 {
     margin-bottom: 20px;
     background: linear-gradient(90deg, #2563eb, #7c3aed);
@@ -64,25 +62,66 @@ h1, h2, h3 {
     -webkit-text-fill-color: transparent;
 }
 
-/*BUTTONS */
-button, .btn {
+
+button,
+.btn {
     background: linear-gradient(90deg, #22c55e, #16a34a);
     color: white !important;
     border: none;
     padding: 12px 24px;
     border-radius: 12px;
     font-weight: 600;
+    cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-    button:hover, .btn:hover {
+    button:hover,
+    .btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(34,197,94,0.4);
+        box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
     }
 
-/*INPUTS */
-input, select {
+
+input,
+select,
+textarea {
     width: 100%;
     padding: 12px;
     margin-bottom: 18px;
-    border-radius: 10
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+
+form {
+    text-align: left;
+}
+
+
+.meme-card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .meme-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    }
+
+    .meme-card img {
+        height: 250px;
+        width: 100%;
+        object-fit: cover;
+    }
+
+
+footer {
+    margin-top: auto;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    opacity: 0.9;
+}

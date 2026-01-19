@@ -49,6 +49,7 @@ namespace MemeMatch.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
         [HttpPost]
         [ActionName("StartNewGame")]
         public IActionResult StartNewGame2()
