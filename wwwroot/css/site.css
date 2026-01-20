@@ -127,3 +127,8 @@ footer {
     font-size: 14px;
     opacity: 0.9;
 }
+.card img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}

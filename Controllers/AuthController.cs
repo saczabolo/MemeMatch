@@ -78,7 +78,7 @@ namespace MemeMatch.Controllers
                 dto.Password,
                 isPersistent: false,
                 lockoutOnFailure: false
-                );
+            );
 
             if (!result.Succeeded)
             {
@@ -86,8 +86,18 @@ namespace MemeMatch.Controllers
                 return View(dto);
             }
 
+           
+            var user = await _userManager.FindByNameAsync(dto.Username);
+
+            if (user != null && await _userManager.IsInRoleAsync(user, "Admin"))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+
+            
             return RedirectToAction("StartNewGame", "Game");
         }
+
 
         public async Task<IActionResult> Logout()
         {
