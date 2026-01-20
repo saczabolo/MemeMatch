@@ -11,28 +11,36 @@
 <br />
 
 
-<form asp-controller="Game" asp-action="StartNewGame" method="post">
-    <button type="submit" class="btn btn-primary btn-lg">
-        🎮 Rozpocznij nową grę
-    </button>
-</form>
-<form asp-controller="Auth" asp-action="Login" method="post">
-    <button type="submit" class="btn btn-primary btn-lg">
-        🎮 Zaloguj się
-    </button>
-</form>
-<form asp-controller="Auth" asp-action="Register" method="post">
-    <button type="submit" class="btn btn-primary btn-lg">
-        🎮 Zarejestruj się
-    </button>
-</form>
-<form asp-controller="Ranking" asp-action="GetRanking" method="get">
-    <button type="submit" class="btn btn-primary btn-lg">
-        🎮 Zobacz ranking
-    </button>
-</form>
-<form asp-controller="Stats" asp-action="GetStats" method="get">
-    <button type="submit" class="btn btn-primary btn-lg">
-        🎮 Zobacz staty
-    </button>
-</form>
+<div class="d-flex flex-column align-items-center gap-4 mt-5">
+
+    <form asp-controller="Game" asp-action="StartNewGame" method="post">
+        <button type="submit" class="btn btn-primary btn-lg px-5">
+            Rozpocznij nową grę
+        </button>
+    </form>
+
+    <form asp-controller="Auth" asp-action="Login" method="post">
+        <button type="submit" class="btn btn-primary btn-lg px-5">
+            Zaloguj się
+        </button>
+    </form>
+
+    <form asp-controller="Auth" asp-action="Register" method="post">
+        <button type="submit" class="btn btn-primary btn-lg px-5">
+            Zarejestruj się
+        </button>
+    </form>
+
+    <form asp-controller="Ranking" asp-action="GetRanking" method="get">
+        <button type="submit" class="btn btn-primary btn-lg px-5">
+            Zobacz ranking
+        </button>
+    </form>
+
+    <form asp-controller="Stats" asp-action="GetStats" method="get">
+        <button type="submit" class="btn btn-primary btn-lg px-5">
+            Zobacz staty
+        </button>
+    </form>
+
+</div>
