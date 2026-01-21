@@ -118,7 +118,7 @@ namespace MemeMatch.Controllers
                 Score = score
             });
 
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
 
             TempData["IsCorrect"] = isCorrect;
             TempData["Score"] = score;
