@@ -19,7 +19,7 @@ namespace MemeMatch.Controllers
             _userManager = userManager;
         }
 
-        private const int MaxRounds = 5;
+        private const int MaxRounds = 10;
 
         [HttpGet]
         public IActionResult StartGame()
