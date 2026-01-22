@@ -93,6 +93,11 @@ namespace MemeMatch.Controllers
         public async Task<IActionResult> Answer(int memeId, int promptId)
         {
             var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+            {
+                return RedirectToAction(nameof(Result));
+            }
             
             var prompt = _context.Prompts.Find(promptId);
 
