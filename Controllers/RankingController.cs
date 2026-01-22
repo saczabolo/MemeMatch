@@ -30,7 +30,7 @@ namespace MemeMatch.Controllers
                 .Select(u => new
                 {
                     Username = u.UserName,
-                    Points = u.GameRounds.Sum(g => (int?)g.Score) ?? 0
+                    Points = u.GameRounds.Sum(g => (int?)g.Score) 
                 })
                 .ToListAsync();
 

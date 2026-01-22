@@ -53,6 +53,8 @@ namespace MemeMatch.Controllers
 
             await _userManager.AddToRoleAsync(user, "User");
 
+            await _signInManager.SignInAsync(user, isPersistent: false);
+
             TempData["Success"] = "Rejestracja zakończona sukcesem";
             return RedirectToAction("Index", "Home");
         }
