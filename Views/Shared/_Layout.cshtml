@@ -18,7 +18,19 @@
         <div class="mm-nav-links">
             <a asp-controller="Home" asp-action="Index">Home</a>
             <a asp-controller="Memes" asp-action="Index">Memes</a>
-            <a asp-controller="Auth" asp-action="Login">Login</a>
+
+            @if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                <span class="mm-user">
+                    👤 @User.Identity.Name
+                </span>
+
+                <a asp-controller="Auth" asp-action="Logout">Wyloguj</a>
+            }
+            else
+            {
+                <a asp-controller="Auth" asp-action="Login">Login</a>
+            }
         </div>
     </div>
 
