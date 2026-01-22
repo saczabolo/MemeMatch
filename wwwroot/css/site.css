@@ -55,6 +55,12 @@ body {
     text-align: center;
 }
 
+.mm-user {
+    margin-right: 15px;
+    font-weight: 600;
+    color: white;
+} 
+
 h1, h2, h3 {
     margin-bottom: 20px;
     background: linear-gradient(90deg, #2563eb, #7c3aed);
