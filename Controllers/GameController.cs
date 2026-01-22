@@ -19,7 +19,7 @@ namespace MemeMatch.Controllers
             _userManager = userManager;
         }
 
-        private const int MaxRounds = 5;
+        private const int MaxRounds = 10;
 
         [HttpGet]
         public IActionResult StartGame()
@@ -48,6 +48,7 @@ namespace MemeMatch.Controllers
         {
             return RedirectToAction("Index", "Home");
         }
+
 
         [HttpPost]
         [ActionName("StartNewGame")]
@@ -101,9 +102,9 @@ namespace MemeMatch.Controllers
             }
             
             bool isCorrect = memeId == prompt.CorrectMemeId;
-            int score = isCorrect ? 10 : 0;
+            int score = isCorrect ? 10 : 3;
 
-            int totalScore = HttpContext.Session.GetInt32("TotalScore") ?? 0;
+            int totalScore = HttpContext.Session.GetInt32("TotalScore") ?? 3;
             HttpContext.Session.SetInt32("TotalScore", totalScore + score);
 
             int round = HttpContext.Session.GetInt32("Round") ?? 1;

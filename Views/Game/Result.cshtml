@@ -12,5 +12,18 @@ else
 <p>Punkty: @ViewBag.Score</p>
 
 
-<a asp-action="NextRound">Następna runda</a>
-<a asp-action="StartGame">Zagraj ponownie</a>
+<div class="d-flex justify-content-center gap-3 mt-4">
+
+    <a asp-action="NextRound"
+       class="btn btn-primary btn-lg">
+        Następna runda
+    </a>
+
+    <a asp-action="StartGame"
+       class="btn btn-primary btn-lg">
+        Zagraj ponownie
+    </a>
+
+</div>
+
+

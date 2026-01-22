@@ -1,0 +1,18 @@
+﻿@model List<string>
+
+@{
+    ViewData["Title"] = "Memes";
+}
+
+<h2 class="mb-4"> Jakie memy mamy:</h2>
+
+<div class="row">
+    @foreach (var meme in Model)
+    {
+        <div class="col-md-3 mb-4">
+            <div class="card shadow-sm">
+                <img src="@meme" class="card-img-top" />
+            </div>
+        </div>
+    }
+</div>
